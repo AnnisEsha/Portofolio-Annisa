@@ -5,10 +5,141 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portofolio | Annisa Esha</title>
     <link rel="stylesheet" href="style.css" />
-    <script
-      src="https://kit.fontawesome.com/7eee840aa0.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/7eee840aa0.js" crossorigin="anonymous" ></script>
+    <style>
+      *{
+        margin: 0;
+        padding: 0;
+    }
+    
+    body{
+        font-family: sans-serif;
+        font-family: 'monserrat', sans-serif;
+        overflow-x: hidden;
+    }
+    
+    nav{
+        display: flex;
+        background-color: rgb(247, 247, 242);
+        justify-content: space-around;
+        /* padding: 20px 0; */
+        color:  rgb(251, 196, 222);
+        height: 60px;
+        align-items: center;
+    }
+    
+    nav .logo{
+        font-family: 'Rubik Doodle Shadow', sans-serif;
+        letter-spacing: 1px;
+    }
+    nav ul{
+        display: flex;
+        list-style: none;
+        width: 40%;
+        justify-content: space-between;
+    }
+    nav ul li a{
+        color:  rgb(251, 196, 222);
+        text-decoration: none;
+        font-size: 0.8em;   
+    }
+    
+    nav ul li a:hover{
+        color: rgb(255, 228, 240) ;
+    }
+    
+    
+    /* hamburger menu */
+    .menu-toggle{
+        display: none;
+        flex-direction: column;
+        height: 20px;
+        justify-content: space-between;
+        position: relative;
+    }
+    
+    .menu-toggle input{
+        position: absolute;
+        width: 40px;
+        height: 28px;
+        left: -6px;
+        top: -3px;
+        opacity: 0;
+        z-index: 2;
+    }
+    
+    .menu-toggle span{
+        display: block;
+        width: 28px;
+        height: 3px;
+        background-color: rgb(241, 245, 14);
+        border-radius: 3px;
+        transition: 0.5s;
+    }
+    
+    
+    /* Menu Annimation */
+    .menu-toggle span:nth-child(2){
+        transform-origin: 0 0;
+    }
+    
+    .menu-toggle span:nth-child(4){
+        transform-origin: 0 100%;
+    }
+    
+    .menu-toggle input:checked ~ span:nth-child(2){
+        background-color: rgb(255, 228, 240);
+        transform: rotate(45deg) translate(-1px, -1px);
+    }
+    .menu-toggle input:checked ~ span:nth-child(4){
+        background-color: rgb(255, 228, 240);
+        transform: rotate(-45deg) translate(-1px, 0);
+    }
+    .menu-toggle input:checked ~ span:nth-child(3){
+        transform: scale(0);
+        opacity: 0;
+    }
+    
+    
+    
+    
+    /* responsive breakpoint */
+    
+    /* ukuran tablet */
+    @media screen and (max-width: 768px){
+        nav ul {
+            width: 50%;
+        }
+    }
+    
+    /* ukuran mobile */
+    @media screen and (max-width: 576px){
+        .menu-toggle{
+            display: flex;
+        }
+    
+        nav ul {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            width: 80%;
+            flex-direction: column;
+            justify-content: space-evenly;
+            background-color: rgb(231, 228, 12);
+            align-items: center;
+            z-index: -1;
+            transform: translateX(100%);
+            transition: all 1s;
+            opacity: 0;
+        }
+    
+        nav ul.slide{
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }    
+    </style>
   </head>
   <body>
     <!-- Headar Section -->
@@ -393,5 +524,12 @@
       </div>
     </footer>
     <!-- Footer End -->
+    <script>
+      const menuToggle = document.querySelector('.menu-toggle input');
+const nav = document.querySelector('nav ul');
+menuToggle.addEventListener('click', function(){
+    nav.classList.toggle('slide');
+});
+    </script>
   </body>
 </html>
