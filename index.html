@@ -6,6 +6,7 @@
     <title>Portofolio | Annisa Esha</title>
     <link rel="stylesheet" href="style.css" />
     <script src="https://kit.fontawesome.com/7eee840aa0.js" crossorigin="anonymous" ></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
       *{
         margin: 0;
@@ -477,7 +478,7 @@
     <!-- Testimonial end -->
 
     <!-- Contact Section -->
-    <section id="contact" style="overflow: hidden">
+    <section id="contact">
       <div class="circle"></div>
       <div class="circle2"></div>
       <div class="footer-gap">
@@ -487,7 +488,7 @@
         <div class="contact-content">
           <div class="contact-information">
             <div class="contact-head">
-              <p>WhatsApp 24/7 <br />083107272655</p>
+              <p>WhatsApp 24/7 <br>083107272655</p>
             </div>
             <div class="contact-subhead">
               <p><b>Address: </b>Jl Pemuda</p>
@@ -496,9 +497,14 @@
             </div>
           </div>
           <div class="contact-form">
-                </div>
-              </div>
+            <form id="contactForm" method="post">
+              <input type="text" id="fullname" name="fullname" placeholder="Nama Lengkap" maxlength="50" required><br>
+              <input type="email" id="email" name="email" placeholder="Email" maxlength="50" required><br>
+              <input type="tel" id="phone" name="phone" placeholder="Nomor Handphone" maxlength="15" required><br>
+              <textarea id="message" name="message" placeholder="Pesan" maxlength="250" required></textarea><br>
+              <button type="submit">Kirim Pesan</button>
             </form>
+            <div id="response"></div>
           </div>
         </div>
       </div>
@@ -530,6 +536,67 @@ const nav = document.querySelector('nav ul');
 menuToggle.addEventListener('click', function(){
     nav.classList.toggle('slide');
 });
+    </script>
+    <script>
+      $(document).ready(function() {
+        $('#contactForm').submit(function(e) {
+          e.preventDefault();
+  
+          var fullname = $('#fullname').val();
+          var email = $('#email').val();
+          var phone = $('#phone').val();
+          var message = $('#message').val();
+  
+          // Validasi nama lengkap
+          if (fullname.length === 0) {
+            $('#response').html('<p>Nama lengkap harus diisi.</p>');
+            return;
+          }
+  
+          // Validasi email
+          if (!isValidEmail(email)) {
+            $('#response').html('<p>Email tidak valid.</p>');
+            return;
+          }
+  
+          // Validasi nomor handphone
+          if (!isValidPhone(phone)) {
+            $('#response').html('<p>Nomor handphone tidak valid.</p>');
+            return;
+          }
+  
+          // Validasi panjang pesan
+          if (message.length === 0 || message.length > 250) {
+            $('#response').html('<p>Pesan harus diisi dan maksimal 250 karakter.</p>');
+            return;
+          }
+  
+          // Jika formulir valid, lakukan pengiriman data
+          $('#response').html('<p>Pesan berhasil dikirim!</p>');
+  
+          // Lakukan pengiriman formulir ke server di sini
+          // $.ajax({
+          //   url: 'proses.php',
+          //   method: 'POST',
+          //   data: $(this).serialize(),
+          //   success: function(response) {
+          //     $('#response').html(response);
+          //   }
+          // });
+        });
+  
+        // Fungsi validasi email
+        function isValidEmail(email) {
+          var pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          return pattern.test(email);
+        }
+  
+        // Fungsi validasi nomor handphone
+        function isValidPhone(phone) {
+          var pattern = /^[0-9\-\+\(\) ]{5,}$/;
+          return pattern.test(phone);
+        }
+      });
     </script>
   </body>
 </html>
